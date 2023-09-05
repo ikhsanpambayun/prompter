@@ -30,7 +30,7 @@ const Nav = () => {
           height={30}
           className="object-contain"
         ></Image>
-        <p className="logo_text">Propmtopia</p>
+        <p className="logo_text">Propmter</p>
       </Link>
 
       {/* Desktop Nav */}

@@ -50,8 +50,8 @@ const ProfilePage = () => {
 
   return (
     <Profile
-      name="Me"
-      desc="desc"
+      name={session?.user.name}
+      desc="These are the prompts you have created"
       data={posts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

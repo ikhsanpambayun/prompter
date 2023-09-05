@@ -19,7 +19,29 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
 
   const handleSearchChange = (e) => {
-    console.log(e);
+    const search_input = e.target.value;
+    setSearchText(search_input);
+
+    if (search_input == "") {
+      const fetchPosts = async () => {
+        const respose = await fetch("/api/prompt");
+        const data = await respose.json();
+
+        setPosts(data);
+      };
+
+      fetchPosts();
+    } else {
+      const fetchPosts = async () => {
+        const url = "/api/prompt/find/" + search_input;
+        const respose = await fetch(url);
+        const data = await respose.json();
+
+        setPosts(data);
+      };
+
+      fetchPosts();
+    }
   };
 
   useEffect(() => {
@@ -39,8 +61,8 @@ const Feed = () => {
         <input
           type="text"
           placeholder="Search for a tag or username"
-          // value={searchText}
-          // onChange={handleSearchChange}
+          value={searchText}
+          onChange={handleSearchChange}
           required
           className="search_input peer"
         />

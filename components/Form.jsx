@@ -8,8 +8,7 @@ const Form = ({ handleSubmit, type, post, setPost }) => {
         <span className="blue_gradient">{type} Post</span>
       </h1>
       <p className="desc text-left max-w-md">
-        Create and Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
-        libero veniam voluptas harum obcaecati.
+        Start to create interesting and inspiring quotes.
       </p>
 
       <form
@@ -18,7 +17,7 @@ const Form = ({ handleSubmit, type, post, setPost }) => {
       >
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Your AI Prompt
+            Your Prompt
           </span>
           <textarea
             value={post.prompt}
@@ -32,8 +31,8 @@ const Form = ({ handleSubmit, type, post, setPost }) => {
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Tag{" "}
-            <span className="font-normal">
-              (#product, #AI, #project, #quotes)
+            <span className="font-normal text-sm opacity-75">
+              (motivation, health, loves, work)
             </span>
           </span>
           <input
@@ -41,7 +40,7 @@ const Form = ({ handleSubmit, type, post, setPost }) => {
             onChange={(e) => setPost({ ...post, tag: e.target.value })}
             id="tag"
             type="text"
-            placeholder="#tag"
+            placeholder="tag"
             required
             className="form_input"
           ></input>

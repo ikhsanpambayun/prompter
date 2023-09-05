@@ -7,12 +7,14 @@ const Home = () => {
       <h1 className="head_text text-center">
         Discover and Share
         <br className="max-md:hidden" />
-        <span className="orange_gradient text-center"> Ai-Powered Prompts</span>
+        <span className="orange_gradient text-center">
+          {" "}
+          Interesting Prompts
+        </span>
       </h1>
       <p className="desc text-center">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum nobis
-        cumque enim dolorum vitae ex atque ratione, dolore ipsa a odio ipsam
-        eaque? Voluptate pariatur, ab vitae quis earum laudantium?
+        Prompter is a simple project to create, discover, and share interesting
+        and inspiring quotes in the form of prompts.
       </p>
 
       <Feed></Feed>

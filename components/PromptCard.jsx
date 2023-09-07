@@ -6,12 +6,27 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const PromptCard = ({ post, handleTagCLick, handleEdit, handleDelete }) => {
+const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
 
   const [copied, setCopied] = useState("");
+
+  const handleProfile = () => {
+    if (post.creator._id === session?.user.id) {
+      router.push("/profile");
+    } else {
+      router.push(
+        "/profile/" +
+          post.creator._id +
+          "?name=" +
+          post.creator.username +
+          "&email=" +
+          post.creator.email
+      );
+    }
+  };
 
   const handleCopy = () => {
     setCopied(post.prompt);
@@ -20,9 +35,12 @@ const PromptCard = ({ post, handleTagCLick, handleEdit, handleDelete }) => {
   };
 
   return (
-    <div className="prompt_card">
+    <div className="prompt_card transition duration-300 hover:scale-110">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+          onClick={() => handleProfile && handleProfile()}
+        >
           <Image
             src={post.creator.image}
             alt="user_image"
@@ -58,7 +76,7 @@ const PromptCard = ({ post, handleTagCLick, handleEdit, handleDelete }) => {
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagCLick && handleTagCLick(post.tag)}
+        onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
         #{post.tag}
       </p>

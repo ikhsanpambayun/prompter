@@ -3,6 +3,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
+import { useRouter } from "next/navigation";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -15,8 +16,23 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
+  const router = useRouter();
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
+
+  const handleTagClick = (tag) => {
+    setSearchText(tag);
+
+    const fetchPosts = async () => {
+      const url = "/api/prompt/find/" + tag;
+      const respose = await fetch(url);
+      const data = await respose.json();
+
+      setPosts(data);
+    };
+
+    fetchPosts();
+  };
 
   const handleSearchChange = (e) => {
     const search_input = e.target.value;
@@ -60,7 +76,7 @@ const Feed = () => {
       <form action="" className="relative w-full flex-center">
         <input
           type="text"
-          placeholder="Search for a tag or username"
+          placeholder="Search for a tag"
           value={searchText}
           onChange={handleSearchChange}
           required
@@ -68,7 +84,10 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={posts} handleTagClick={() => {}}></PromptCardList>
+      <PromptCardList
+        data={posts}
+        handleTagClick={handleTagClick}
+      ></PromptCardList>
     </section>
   );
 };
